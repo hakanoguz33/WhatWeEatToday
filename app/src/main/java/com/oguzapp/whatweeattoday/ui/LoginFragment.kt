@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.findFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.viewModels.LoginViewModel
 
@@ -28,17 +31,28 @@ class LoginFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         init(view)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        viewModel.getUserList(requireContext())
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        super.onViewCreated(view, savedInstanceState)
         loginButton.setOnClickListener {
-            viewModel.validateUser(
+            val isValidate = viewModel.validateUser(
                 userNameEditText.text.toString(),
-                passwordEditText.text.toString()
+                passwordEditText.text.toString(),
+                requireContext()
             )
+            if (isValidate) {
+                Toast.makeText(context, "Giriş Başarılı", Toast.LENGTH_SHORT).show()
+                it.findNavController().navigate(R.id.action_loginFragment_to_selectCountryFragment)
+            } else {
+                Toast.makeText(context,"Kullanıcı Adı veya Şifre Hatalı",Toast.LENGTH_SHORT).show()
+                userNameEditText.error = "Kullanıcı Adı veya Şifre Hatalı"
+                passwordEditText.error = "Kullanıcı Adı veya Şifre Hatalı"
+            }
         }
         forgotPasswordTextView.setOnClickListener {
             viewModel.forgotPassword()
