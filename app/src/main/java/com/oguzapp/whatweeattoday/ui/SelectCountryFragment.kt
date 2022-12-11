@@ -29,6 +29,5 @@ class SelectCountryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[SelectCountryViewModel::class.java]
-
     }
 }

@@ -35,5 +35,9 @@
         android:id="@+id/fridgeFragment"
         android:name="com.oguzapp.whatweeattoday.ui.FridgeFragment"
         android:label="fragment_fridge"
-        tools:layout="@layout/fragment_fridge" />
+        tools:layout="@layout/fragment_fridge" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+    </fragment>
 </navigation>
