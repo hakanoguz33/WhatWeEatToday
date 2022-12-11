@@ -6,28 +6,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.oguzapp.whatweeattoday.R
+import com.oguzapp.whatweeattoday.adapters.CountriesRVAdapter
+import com.oguzapp.whatweeattoday.network.Constants
 import com.oguzapp.whatweeattoday.viewModels.SelectCountryViewModel
 
 class SelectCountryFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = SelectCountryFragment()
-    }
-
     private lateinit var viewModel: SelectCountryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_select_country, container, false)
+        val view = inflater.inflate(R.layout.fragment_select_country, container, false)
+        viewModel = ViewModelProvider(this)[SelectCountryViewModel::class.java]
+        viewModel.downloadCountriesList(requireContext(),view)
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SelectCountryViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[SelectCountryViewModel::class.java]
 
+    }
 }

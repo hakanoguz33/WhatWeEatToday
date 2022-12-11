@@ -29,7 +29,7 @@ class LoginViewModel : ViewModel() {
 
     fun getUserList(context: Context){
         postService = ApiClient.getClient().create(RetrofitAPI::class.java)
-        val post = postService.listUser("1")
+        val post = postService.listUser("")
 
         post.enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
