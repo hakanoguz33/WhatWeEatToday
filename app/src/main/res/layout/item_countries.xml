@@ -21,7 +21,11 @@
         android:textSize="20sp"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:text="s"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:text="United States Of America"
         android:gravity="center">
     </TextView>
 </LinearLayout>
