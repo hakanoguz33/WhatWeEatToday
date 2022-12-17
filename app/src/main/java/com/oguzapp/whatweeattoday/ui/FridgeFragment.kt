@@ -27,10 +27,10 @@ class FridgeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[FridgeViewModel::class.java]
         val countryName = requireArguments().getString("countryName")
         viewModel.setRecyclerView(view,countryName!!)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+        /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 view.findNavController().navigate(R.id.action_fridgeFragment_to_selectCountryFragment)
             }
-        })
+        })*/
     }
 }

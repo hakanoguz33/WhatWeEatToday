@@ -3,6 +3,7 @@ package com.oguzapp.whatweeattoday.viewModels
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.adapters.FridgeRVAdapter
@@ -17,7 +18,7 @@ class FridgeViewModel : ViewModel() {
         val recyclerView: RecyclerView = view.findViewById(R.id.fridgeRecyclerView)
         val adapter = FridgeRVAdapter(Constants.foodList)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(view.context,2)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
     }
 
     private fun findAndGetFoodList(countryName: String): ArrayList<Food>? {
