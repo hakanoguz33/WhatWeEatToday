@@ -24,7 +24,7 @@ class FoodViewModel : ViewModel() {
             var material = food.materials
             material = material.replace(",",System.getProperty("line.separator"))
             foodTextView.text = material
-            Glide.with(view).load(food.imageUrl).into(foodImageView)
+            Glide.with(view).load(food.imageURL).into(foodImageView)
         }
     }
 

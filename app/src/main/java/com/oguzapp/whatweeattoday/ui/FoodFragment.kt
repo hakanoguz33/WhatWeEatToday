@@ -17,15 +17,13 @@ class FoodFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_food, container, false)
-        viewModel = ViewModelProvider(this)[FoodViewModel::class.java]
-        val foodName:String = requireArguments().getString("foodName")!!
-        viewModel.setScreen(view,foodName)
-        return view
+        return inflater.inflate(R.layout.fragment_food, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[FoodViewModel::class.java]
+        val foodName:String = requireArguments().getString("foodName")!!
+        viewModel.setScreen(view,foodName)
     }
 }

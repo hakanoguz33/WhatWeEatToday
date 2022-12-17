@@ -13,8 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
-    private lateinit var postService: RetrofitAPI
-    lateinit var postList: ArrayList<User>
+    private lateinit var service: RetrofitAPI
+    lateinit var userList: ArrayList<User>
     fun validateUser(userName: String, password: String, context: Context): Boolean {
         return checkUser(Constants.userList,userName,password)
     }
@@ -28,8 +28,8 @@ class LoginViewModel : ViewModel() {
     }
 
     fun getUserList(context: Context){
-        postService = ApiClient.getClient().create(RetrofitAPI::class.java)
-        val post = postService.listUser("")
+        service = ApiClient.getClient().create(RetrofitAPI::class.java)
+        val post = service.listUser("")
 
         post.enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
@@ -38,8 +38,8 @@ class LoginViewModel : ViewModel() {
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful)
-                    postList = (response.body() as ArrayList<User>?)!!
-                Constants.userList = postList
+                    userList = (response.body() as ArrayList<User>?)!!
+                Constants.userList = userList
                 Log.i("userlist indi","userlistindiiiii")
             }
         })

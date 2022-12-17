@@ -1,4 +1,10 @@
 package com.oguzapp.whatweeattoday.models
 
-data class Food(val name:String,val imageUrl:String,val materials:String) {
-}
+import com.google.gson.annotations.SerializedName
+
+data class Food (
+    val name: String,
+    @SerializedName("imageUrl")
+    val imageURL: String,
+    val materials: String
+)

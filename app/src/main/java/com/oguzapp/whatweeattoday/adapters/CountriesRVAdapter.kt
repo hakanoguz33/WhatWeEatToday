@@ -27,7 +27,7 @@ class CountriesRVAdapter(private val countriesList: ArrayList<Countries>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(holder.itemView).load(countriesList[position].flagUrl).into(holder.countryFlag)
+        Glide.with(holder.itemView).load(countriesList[position].flagURL).into(holder.countryFlag)
         holder.countryName.text = countriesList[position].countryName
         holder.countryFlag.setOnClickListener {
             val bundle = Bundle()

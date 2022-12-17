@@ -27,7 +27,7 @@ class FridgeRVAdapter(private val foodList: ArrayList<Food>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentFood = foodList[position]
-        Glide.with(holder.itemView).load(currentFood.imageUrl).into(holder.foodImageView)
+        Glide.with(holder.itemView).load(currentFood.imageURL).into(holder.foodImageView)
         holder.foodTextView.text = currentFood.name
         holder.foodImageView.setOnClickListener {
             val bundle = Bundle()
@@ -38,5 +38,11 @@ class FridgeRVAdapter(private val foodList: ArrayList<Food>) :
 
     override fun getItemCount(): Int {
         return foodList.size
+    }
+
+    private fun clear(){
+        val size = foodList.size
+        foodList.clear();
+        notifyItemRangeRemoved(0, size)
     }
 }
