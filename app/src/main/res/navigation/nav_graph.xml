@@ -39,5 +39,23 @@
         <argument
             android:name="countryName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fridgeFragment_to_foodFragment"
+            app:destination="@id/foodFragment" />
+        <action
+            android:id="@+id/action_fridgeFragment_to_selectCountryFragment"
+            app:destination="@id/selectCountryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.oguzapp.whatweeattoday.ui.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food" >
+        <argument
+            android:name="foodName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_foodFragment_to_fridgeFragment"
+            app:destination="@id/fridgeFragment" />
     </fragment>
 </navigation>
