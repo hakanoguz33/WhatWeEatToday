@@ -30,7 +30,7 @@ class CountriesRVAdapter(private val countriesList: ArrayList<Countries>) :
         Glide.with(holder.itemView).load(countriesList[position].flagUrl).into(holder.countryFlag)
         holder.countryName.text = countriesList[position].countryName
         holder.countryFlag.setOnClickListener {
-            val bundle:Bundle = Bundle()
+            val bundle = Bundle()
             bundle.putString("countryName",countriesList[position].countryName)
             it.findNavController().navigate(R.id.action_selectCountryFragment_to_fridgeFragment,bundle)
         }

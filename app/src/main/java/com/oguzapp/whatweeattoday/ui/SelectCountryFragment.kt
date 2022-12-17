@@ -1,16 +1,12 @@
 package com.oguzapp.whatweeattoday.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.oguzapp.whatweeattoday.R
-import com.oguzapp.whatweeattoday.adapters.CountriesRVAdapter
-import com.oguzapp.whatweeattoday.network.Constants
 import com.oguzapp.whatweeattoday.viewModels.SelectCountryViewModel
 
 class SelectCountryFragment : Fragment() {
