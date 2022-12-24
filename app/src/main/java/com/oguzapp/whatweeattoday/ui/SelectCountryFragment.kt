@@ -1,9 +1,12 @@
 package com.oguzapp.whatweeattoday.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.oguzapp.whatweeattoday.R
@@ -18,7 +21,22 @@ class SelectCountryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_select_country, container, false)
         viewModel = ViewModelProvider(this)[SelectCountryViewModel::class.java]
-        viewModel.downloadCountriesList(requireContext(),view)
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(context!!)
+                        .setMessage(R.string.exit_app)
+                        .setPositiveButton(R.string.positive_button_text, { dialogInteface, i -> })
+                        .setNegativeButton(
+                            R.string.negative_button_text,
+                            { dialogInterface, i ->
+                                activity?.finish()
+                            })
+                        .create()
+                }
+            })
+        viewModel.downloadCountriesList(requireContext(), view)
         return view
     }
 
