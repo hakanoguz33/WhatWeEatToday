@@ -10,9 +10,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oguzapp.whatweeattoday.R
-import com.oguzapp.whatweeattoday.models.Countries
+import com.oguzapp.whatweeattoday.models.Country
 
-class CountriesRVAdapter(private val countriesList: ArrayList<Countries>) :
+class CountriesRVAdapter(private val countriesList: ArrayList<Country>) :
     RecyclerView.Adapter<CountriesRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

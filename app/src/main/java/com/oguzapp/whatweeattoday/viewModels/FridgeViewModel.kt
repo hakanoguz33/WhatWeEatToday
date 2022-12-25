@@ -2,7 +2,6 @@ package com.oguzapp.whatweeattoday.viewModels
 
 import android.view.View
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzapp.whatweeattoday.R
@@ -22,9 +21,9 @@ class FridgeViewModel : ViewModel() {
     }
 
     private fun findAndGetFoodList(countryName: String): ArrayList<Food>? {
-        for (country in Constants.countriesList)
+        for (country in Constants.countryList)
             if (country.countryName == countryName)
-                return country.foodList as ArrayList<Food>
+                return country.foodList
         return null
     }
 }

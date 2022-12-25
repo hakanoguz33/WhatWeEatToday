@@ -1,5 +1,6 @@
 package com.oguzapp.whatweeattoday.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,10 @@ import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.oguzapp.whatweeattoday.R
+import com.oguzapp.whatweeattoday.db.CountryDatabase
+import com.oguzapp.whatweeattoday.db.FoodTypeConverters
+import com.oguzapp.whatweeattoday.db.model.CountryEntity
+import com.oguzapp.whatweeattoday.network.Constants
 import com.oguzapp.whatweeattoday.viewModels.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -49,7 +54,8 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Giriş Başarılı", Toast.LENGTH_SHORT).show()
                 it.findNavController().navigate(R.id.action_loginFragment_to_selectCountryFragment)
             } else {
-                Toast.makeText(context,"Kullanıcı Adı veya Şifre Hatalı",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Kullanıcı Adı veya Şifre Hatalı", Toast.LENGTH_SHORT)
+                    .show()
                 userNameEditText.error = "Kullanıcı Adı veya Şifre Hatalı"
                 passwordEditText.error = "Kullanıcı Adı veya Şifre Hatalı"
             }

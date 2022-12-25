@@ -1,5 +1,6 @@
 package com.oguzapp.whatweeattoday.ui
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.oguzapp.whatweeattoday.R
+import com.oguzapp.whatweeattoday.db.CountryDatabase
+import com.oguzapp.whatweeattoday.db.FoodTypeConverters
+import com.oguzapp.whatweeattoday.db.model.CountryEntity
+import com.oguzapp.whatweeattoday.network.Constants
 import com.oguzapp.whatweeattoday.viewModels.SelectCountryViewModel
 
 class SelectCountryFragment : Fragment() {
@@ -27,13 +32,14 @@ class SelectCountryFragment : Fragment() {
                 override fun handleOnBackPressed() {
                     AlertDialog.Builder(context!!)
                         .setMessage(R.string.exit_app)
-                        .setPositiveButton(R.string.positive_button_text, { dialogInteface, i -> })
+                        .setPositiveButton(R.string.positive_button_text) { _, _ ->
+                            activity?.finish()
+                        }
                         .setNegativeButton(
-                            R.string.negative_button_text,
-                            { dialogInterface, i ->
-                                activity?.finish()
-                            })
-                        .create()
+                            R.string.negative_button_text
+                        ) { _, _ ->
+                        }
+                        .show()
                 }
             })
         viewModel.downloadCountriesList(requireContext(), view)

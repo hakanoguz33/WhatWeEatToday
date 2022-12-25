@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import com.oguzapp.whatweeattoday.db.CountryDatabase
+import com.oguzapp.whatweeattoday.db.dao.CountryDao
 import com.oguzapp.whatweeattoday.models.User
 import com.oguzapp.whatweeattoday.network.ApiClient
 import com.oguzapp.whatweeattoday.network.Constants
@@ -16,7 +18,7 @@ class LoginViewModel : ViewModel() {
     private lateinit var service: RetrofitAPI
     lateinit var userList: ArrayList<User>
     fun validateUser(userName: String, password: String, context: Context): Boolean {
-        return checkUser(Constants.userList,userName,password)
+        return checkUser(Constants.userList, userName, password)
     }
 
     fun forgotPassword() {
@@ -27,7 +29,7 @@ class LoginViewModel : ViewModel() {
 
     }
 
-    fun getUserList(context: Context){
+    fun getUserList(context: Context) {
         service = ApiClient.getClient().create(RetrofitAPI::class.java)
         val post = service.listUser("")
 
@@ -40,7 +42,7 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful)
                     userList = (response.body() as ArrayList<User>?)!!
                 Constants.userList = userList
-                Log.i("userlist indi","userlistindiiiii")
+                Log.i("userlist", "userlist downloaded")
             }
         })
     }
