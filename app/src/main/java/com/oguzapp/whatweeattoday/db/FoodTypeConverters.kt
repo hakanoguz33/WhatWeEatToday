@@ -6,10 +6,11 @@ import com.oguzapp.whatweeattoday.models.Food
 
 class FoodTypeConverters {
     fun fromFoodToJSON(foodList: ArrayList<Food>): String {
-        return Gson().toJson(foodList)
+        val foodListModel = FoodListModel(foodList)
+        return Gson().toJson(foodListModel)
     }
 
     fun fromJSONToFoodList(json: String): FoodListModel {
-        return Gson().fromJson(json,FoodListModel::class.java)
+        return Gson().fromJson(json, FoodListModel::class.java)
     }
 }

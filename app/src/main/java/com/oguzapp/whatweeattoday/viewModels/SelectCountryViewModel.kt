@@ -1,7 +1,6 @@
 package com.oguzapp.whatweeattoday.viewModels
 
 import android.content.Context
-import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -29,7 +28,7 @@ class SelectCountryViewModel : ViewModel() {
     private lateinit var countriesService: RetrofitAPI
     lateinit var countryList: ArrayList<Country>
 
-    fun downloadCountriesList(context: Context,view: View){
+    fun downloadCountriesList(context: Context, view: View) {
         countriesService = ApiClient.getClient().create(RetrofitAPI::class.java)
         val post = countriesService.listCountries("id")
 
@@ -41,41 +40,73 @@ class SelectCountryViewModel : ViewModel() {
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
                 if (response.isSuccessful)
                     countryList = (response.body() as ArrayList<Country>?)!!
-                Constants.countryList = countryList
-                thread {
+                viewModelScope.launch {
                     val countryDatabase = CountryDatabase.getCountryDatabase(context)
-                    for (countryLocal in countryDatabase!!.getCountryDao().getAllCountries())
-                        for (country in countryList)
-                            if (country.countryName != countryLocal.countryName)
-                                checkAndInsertCountryToDB(context)
-                            else
-                                break
-                    countryDatabase.close()
-                    val file = File(CountryDatabase.getCountryDatabase(context)!!.openHelper.writableDatabase.path)
-                    file.lastModified()
+                    val file =
+                        File(CountryDatabase.getCountryDatabase(context)!!.openHelper.writableDatabase.path)
+                    if (System.currentTimeMillis() > file.lastModified()
+                            .plus(120000)
+                    ) {
+                        Constants.countryList = countryList
+                        Log.i("Countries List", "Countries List downloaded from API")
+                        Toast.makeText(
+                            context,
+                            "Countrylist downloaded from API",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        checkAndInsertCountryToDB(context)
+                        countryDatabase!!.close()
+                    } else {
+                        Constants.countryList.clear()
+                        for (country in countryDatabase!!.getCountryDao().getAllCountries()) {
+                            val country = Country(
+                                country.countryId.toString(),
+                                country.countryName,
+                                country.countryFlagUrl,
+                                FoodTypeConverters().fromJSONToFoodList(country.countryFood).foodList
+                            )
+                            Constants.countryList.add(country)
+                        }
+                        Log.i("Countries List", "Countries List updated from room database")
+                        countryDatabase!!.close()
+                        Toast.makeText(
+                            context,
+                            "Countrylist read from Database",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    setRecyclerViewv(view)
                 }
-                Log.i("Countries List","Countries List downloaded")
-                setRecyclerView(view)
             }
         })
     }
 
-    fun setRecyclerView(view:View){
+    fun setRecyclerViewv(view: View) {
+        setRecyclerView(view)
+    }
+
+    private fun setRecyclerView(view: View) {
         val recyclerView: RecyclerView = view.findViewById(R.id.countryRV)
         val adapter = CountriesRVAdapter(Constants.countryList)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(view.context,2)
+        recyclerView.layoutManager = GridLayoutManager(view.context, 2)
     }
 
-    fun checkAndInsertCountryToDB(context: Context){
-        thread {
+    fun checkAndInsertCountryToDB(context: Context) {
+        viewModelScope.launch {
             val foodTypeConverters = FoodTypeConverters()
             val countryDatabase: CountryDatabase = CountryDatabase.getCountryDatabase(context)!!
             countryDatabase.clearAllTables()
             for (country in Constants.countryList) {
-                val countryEntity = CountryEntity(country.id.toInt(),country.countryName,country.flagURL,foodTypeConverters.fromFoodToJSON(country.foodList))
+                val countryEntity = CountryEntity(
+                    country.id.toInt(),
+                    country.countryName,
+                    country.flagURL,
+                    foodTypeConverters.fromFoodToJSON(country.foodList)
+                )
                 countryDatabase.getCountryDao().addCountry(countryEntity)
             }
+            countryDatabase.close()
         }
     }
 }
