@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.db.CountryDatabase
 import com.oguzapp.whatweeattoday.db.FoodTypeConverters
@@ -37,7 +38,7 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         init(view)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        viewModel.getUserList(requireContext())
+        viewModel.getUserList(requireContext(),view)
         return view
     }
 

@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_loginFragment_to_selectCountryFragment"
             app:destination="@id/selectCountryFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_createUserFragment"
+            app:destination="@id/createUserFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_errorScreenFragment"
+            app:destination="@id/errorScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -57,5 +63,19 @@
         <action
             android:id="@+id/action_foodFragment_to_fridgeFragment"
             app:destination="@id/fridgeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createUserFragment"
+        android:name="com.oguzapp.whatweeattoday.ui.CreateUserFragment"
+        android:label="fragment_create_user"
+        tools:layout="@layout/fragment_create_user" />
+    <fragment
+        android:id="@+id/errorScreenFragment"
+        android:name="com.oguzapp.whatweeattoday.ui.ErrorScreenFragment"
+        android:label="fragment_error_screen"
+        tools:layout="@layout/fragment_error_screen" >
+        <action
+            android:id="@+id/action_errorScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

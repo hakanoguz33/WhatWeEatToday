@@ -5,11 +5,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.oguzapp.whatweeattoday.R
-import com.oguzapp.whatweeattoday.db.CountryDatabase
-import com.oguzapp.whatweeattoday.db.dao.CountryDao
 import com.oguzapp.whatweeattoday.models.User
 import com.oguzapp.whatweeattoday.network.ApiClient
 import com.oguzapp.whatweeattoday.network.Constants
@@ -18,30 +15,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel : ViewModel() {
+class ErrorScreenViewModel : ViewModel() {
     private lateinit var service: RetrofitAPI
     lateinit var userList: ArrayList<User>
 
-    fun validateUser(userName: String, password: String, context: Context): Boolean {
-        return checkUser(Constants.userList, userName, password)
-    }
-
-    fun forgotPassword() {
-
-    }
-
-    fun createUser() {
-
-    }
-
-    fun getUserList(context: Context, view: View) {
+    fun swipeRefreshSet(context: Context, view: View) {
         service = ApiClient.getClient().create(RetrofitAPI::class.java)
         val post = service.listUser("")
 
         post.enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
-                view.findNavController().navigate(R.id.action_loginFragment_to_errorScreenFragment)
             }
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
@@ -49,14 +33,8 @@ class LoginViewModel : ViewModel() {
                     userList = (response.body() as ArrayList<User>?)!!
                 Constants.userList = userList
                 Log.i("userlist", "userlist downloaded")
+                view.findNavController().navigate(R.id.action_errorScreenFragment_to_loginFragment)
             }
         })
-    }
-
-    private fun checkUser(userList: ArrayList<User>, userName: String, password: String): Boolean {
-        for (user in userList)
-            if (user.userName == userName && user.password == password)
-                return true
-        return false
     }
 }
