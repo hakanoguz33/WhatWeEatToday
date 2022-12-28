@@ -1,13 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateUserFragment">
+    android:background="@drawable/app_background">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".ui.CreateUserFragment">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/editTextTextPasswordAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="101dp"
+            android:background="@color/background"
+            android:backgroundTint="@color/text_background"
+            android:ems="10"
+            android:hint="@string/password_please"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textColorHint="@color/background"
+            app:layout_constraintBottom_toTopOf="@+id/createUserButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="220dp"
+            android:background="@color/text_background"
+            android:ems="10"
+            android:hint="@string/username_please"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textColorHint="@color/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/text_background"
+            android:ems="10"
+            android:hint="@string/password_please"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textColorHint="@color/background"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTextPasswordAgain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+        <Button
+            android:id="@+id/createUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="128dp"
+            android:backgroundTint="@color/primary_color"
+            android:text="@string/register"
+            android:textColor="@color/primary_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

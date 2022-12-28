@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.models.Food
+import com.oguzapp.whatweeattoday.utils.Constants
 
 class FridgeRVAdapter(private val foodList: ArrayList<Food>) :
     RecyclerView.Adapter<FridgeRVAdapter.ViewHolder>() {
@@ -31,7 +32,7 @@ class FridgeRVAdapter(private val foodList: ArrayList<Food>) :
         holder.foodTextView.text = currentFood.name
         holder.foodImageView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("foodName", currentFood.name)
+            bundle.putString(Constants.TAG_FOOD, currentFood.name)
             it.findNavController().navigate(R.id.action_fridgeFragment_to_foodFragment, bundle)
         }
     }
@@ -40,7 +41,7 @@ class FridgeRVAdapter(private val foodList: ArrayList<Food>) :
         return foodList.size
     }
 
-    private fun clear(){
+    private fun clear() {
         val size = foodList.size
         foodList.clear();
         notifyItemRangeRemoved(0, size)

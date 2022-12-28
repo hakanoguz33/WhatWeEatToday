@@ -15,14 +15,13 @@ import com.oguzapp.whatweeattoday.db.FoodTypeConverters
 import com.oguzapp.whatweeattoday.db.model.CountryEntity
 import com.oguzapp.whatweeattoday.models.Country
 import com.oguzapp.whatweeattoday.network.ApiClient
-import com.oguzapp.whatweeattoday.network.Constants
+import com.oguzapp.whatweeattoday.utils.Constants
 import com.oguzapp.whatweeattoday.network.RetrofitAPI
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import kotlin.concurrent.thread
 
 class SelectCountryViewModel : ViewModel() {
     private lateinit var countriesService: RetrofitAPI
@@ -30,7 +29,7 @@ class SelectCountryViewModel : ViewModel() {
 
     fun downloadCountriesList(context: Context, view: View) {
         countriesService = ApiClient.getClient().create(RetrofitAPI::class.java)
-        val post = countriesService.listCountries("id")
+        val post = countriesService.listCountries()
 
         post.enqueue(object : Callback<List<Country>> {
             override fun onFailure(call: Call<List<Country>>, t: Throwable) {
@@ -45,20 +44,23 @@ class SelectCountryViewModel : ViewModel() {
                     val file =
                         File(CountryDatabase.getCountryDatabase(context)!!.openHelper.writableDatabase.path)
                     if (System.currentTimeMillis() > file.lastModified()
-                            .plus(120000)
+                            .plus(120000) && file.exists()
                     ) {
                         Constants.countryList = countryList
-                        Log.i("Countries List", "Countries List downloaded from API")
+                        Log.i(Constants.logCountryList, Constants.logCountryListFromApi)
                         Toast.makeText(
                             context,
-                            "Countrylist downloaded from API",
+                            Constants.logCountryListFromApi,
                             Toast.LENGTH_SHORT
                         ).show()
                         checkAndInsertCountryToDB(context)
                         countryDatabase!!.close()
                     } else {
+                        Constants.countryList = countryList
+                        if (countryDatabase!!.getCountryDao().getAllCountries().isEmpty())
+                            checkAndInsertCountryToDB(context)
                         Constants.countryList.clear()
-                        for (country in countryDatabase!!.getCountryDao().getAllCountries()) {
+                        for (country in countryDatabase.getCountryDao().getAllCountries()) {
                             val country = Country(
                                 country.countryId.toString(),
                                 country.countryName,
@@ -67,22 +69,18 @@ class SelectCountryViewModel : ViewModel() {
                             )
                             Constants.countryList.add(country)
                         }
-                        Log.i("Countries List", "Countries List updated from room database")
-                        countryDatabase!!.close()
+                        Log.i(Constants.logCountryList, Constants.logCountryListFromRoom)
+                        countryDatabase.close()
                         Toast.makeText(
                             context,
-                            "Countrylist read from Database",
+                            Constants.logCountryListFromRoom,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    setRecyclerViewv(view)
+                    setRecyclerView(view)
                 }
             }
         })
-    }
-
-    fun setRecyclerViewv(view: View) {
-        setRecyclerView(view)
     }
 
     private fun setRecyclerView(view: View) {

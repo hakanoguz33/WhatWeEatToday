@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.adapters.FridgeRVAdapter
 import com.oguzapp.whatweeattoday.models.Food
-import com.oguzapp.whatweeattoday.network.Constants
+import com.oguzapp.whatweeattoday.utils.Constants
 
 
 class FridgeViewModel : ViewModel() {

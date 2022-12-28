@@ -3,4 +3,26 @@
     <string name="exit_app">Uygulamadan çıkmak istiyor musunuz?</string>
     <string name="positive_button_text">Evet</string>
     <string name="negative_button_text">Hayır</string>
+    <string name="text_turkish">Türkçe</string>
+    <string name="text_English">English</string>
+    <string name="login_successful">Giriş Başarılı</string>
+
+    <string name="login">Giriş Yap</string>
+    <string name="forgot_password">Şifremi Unuttum</string>
+    <string name="registration">Hesap Oluştur</string>
+
+    <string name="username_password_failed">Kullanıcı adı veya şifre hatalı</string>
+    <string name="user_created_successful">Kullanıcı Kaydı Başarılı</string>
+    <string name="password_must_be_same">Parolalar aynı olmalıdır</string>
+    <string name="password_must_included">Parola mutlaka . veya , içermelidir</string>
+    <string name="password_must_more_than">Parola en az 7 hane olmalıdır</string>
+
+    <string name="cannot_find_food">Yemek Tarifi Bulunamadı</string>
+
+    <string name="password_please">Lütfen şifreyi giriniz</string>
+    <string name="username_please">Kullanıcı adı giriniz</string>
+    <string name="register">Kaydol</string>
+
+    <string name="connection_failed">Bağlantı Hatası Tekrar Denemek için Kaydırın</string>
+    <string name="password_cannot_empty">Parola boş bırakılamaz</string>
 </resources>

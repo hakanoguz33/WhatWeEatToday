@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.oguzapp.whatweeattoday.R
+import com.oguzapp.whatweeattoday.utils.Constants
 import com.oguzapp.whatweeattoday.viewModels.FoodViewModel
 
 class FoodFragment : Fragment() {
@@ -23,7 +24,7 @@ class FoodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[FoodViewModel::class.java]
-        val foodName:String = requireArguments().getString("foodName")!!
-        viewModel.setScreen(view,foodName)
+        val foodName: String = requireArguments().getString(Constants.TAG_FOOD)!!
+        viewModel.setScreen(view, foodName)
     }
 }

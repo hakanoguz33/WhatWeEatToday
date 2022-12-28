@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.models.Country
+import com.oguzapp.whatweeattoday.utils.Constants
 
 class CountriesRVAdapter(private val countriesList: ArrayList<Country>) :
     RecyclerView.Adapter<CountriesRVAdapter.ViewHolder>() {
@@ -31,8 +32,9 @@ class CountriesRVAdapter(private val countriesList: ArrayList<Country>) :
         holder.countryName.text = countriesList[position].countryName
         holder.countryFlag.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("countryName",countriesList[position].countryName)
-            it.findNavController().navigate(R.id.action_selectCountryFragment_to_fridgeFragment,bundle)
+            bundle.putString(Constants.TAG_COUNTRY, countriesList[position].countryName)
+            it.findNavController()
+                .navigate(R.id.action_selectCountryFragment_to_fridgeFragment, bundle)
         }
     }
 

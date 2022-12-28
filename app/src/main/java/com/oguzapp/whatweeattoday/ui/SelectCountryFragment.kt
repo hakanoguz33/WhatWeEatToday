@@ -1,7 +1,5 @@
 package com.oguzapp.whatweeattoday.ui
 
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.oguzapp.whatweeattoday.R
-import com.oguzapp.whatweeattoday.db.CountryDatabase
-import com.oguzapp.whatweeattoday.db.FoodTypeConverters
-import com.oguzapp.whatweeattoday.db.model.CountryEntity
-import com.oguzapp.whatweeattoday.network.Constants
 import com.oguzapp.whatweeattoday.viewModels.SelectCountryViewModel
 
 class SelectCountryFragment : Fragment() {

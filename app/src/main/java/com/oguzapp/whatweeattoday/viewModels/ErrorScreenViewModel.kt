@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import com.oguzapp.whatweeattoday.R
 import com.oguzapp.whatweeattoday.models.User
 import com.oguzapp.whatweeattoday.network.ApiClient
-import com.oguzapp.whatweeattoday.network.Constants
+import com.oguzapp.whatweeattoday.utils.Constants
 import com.oguzapp.whatweeattoday.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +21,7 @@ class ErrorScreenViewModel : ViewModel() {
 
     fun swipeRefreshSet(context: Context, view: View) {
         service = ApiClient.getClient().create(RetrofitAPI::class.java)
-        val post = service.listUser("")
+        val post = service.listUser()
 
         post.enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
@@ -32,7 +32,7 @@ class ErrorScreenViewModel : ViewModel() {
                 if (response.isSuccessful)
                     userList = (response.body() as ArrayList<User>?)!!
                 Constants.userList = userList
-                Log.i("userlist", "userlist downloaded")
+                Log.i(Constants.logUserList, Constants.logUserListDownload)
                 view.findNavController().navigate(R.id.action_errorScreenFragment_to_loginFragment)
             }
         })

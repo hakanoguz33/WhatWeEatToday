@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzapp.whatweeattoday.R
+import com.oguzapp.whatweeattoday.utils.Constants
 import com.oguzapp.whatweeattoday.viewModels.FridgeViewModel
 
 class FridgeFragment : Fragment() {
@@ -25,12 +26,7 @@ class FridgeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[FridgeViewModel::class.java]
-        val countryName = requireArguments().getString("countryName")
-        viewModel.setRecyclerView(view,countryName!!)
-        /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                view.findNavController().navigate(R.id.action_fridgeFragment_to_selectCountryFragment)
-            }
-        })*/
+        val countryName = requireArguments().getString(Constants.TAG_COUNTRY)
+        viewModel.setRecyclerView(view, countryName!!)
     }
 }

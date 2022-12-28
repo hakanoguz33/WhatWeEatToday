@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.oguzapp.whatweeattoday.db.dao.CountryDao
 import com.oguzapp.whatweeattoday.db.model.CountryEntity
+import com.oguzapp.whatweeattoday.utils.Constants
 
 @Database(
     version = 2,
@@ -18,7 +19,7 @@ abstract class CountryDatabase : RoomDatabase() {
         fun getCountryDatabase(context: Context): CountryDatabase? {
             if (instance == null)
                 instance =
-                    Room.databaseBuilder(context, CountryDatabase::class.java, "country.db")
+                    Room.databaseBuilder(context, CountryDatabase::class.java, Constants.DB_NAME)
                         .fallbackToDestructiveMigration()
                         .allowMainThreadQueries()
                         .build()

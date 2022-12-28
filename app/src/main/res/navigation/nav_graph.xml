@@ -11,9 +11,6 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_selectCountryFragment"
             app:destination="@id/selectCountryFragment" />
         <action
@@ -23,11 +20,6 @@
             android:id="@+id/action_loginFragment_to_errorScreenFragment"
             app:destination="@id/errorScreenFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/forgotPasswordFragment"
-        android:name="com.oguzapp.whatweeattoday.ui.ForgotPasswordFragment"
-        android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/selectCountryFragment"
         android:name="com.oguzapp.whatweeattoday.ui.SelectCountryFragment"

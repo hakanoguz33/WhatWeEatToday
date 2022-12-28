@@ -28,6 +28,7 @@ class ErrorScreenFragment : Fragment() {
         viewModel = ViewModelProvider(this)[ErrorScreenViewModel::class.java]
         swipeRefresh.setOnRefreshListener {
             viewModel.swipeRefreshSet(requireContext(),view)
+            swipeRefresh.isRefreshing = false
         }
     }
 
